@@ -56,3 +56,11 @@ devtools::document()
 ## to work or notes that would make the package refused by CRAN.
 ## Useful for debugging
 devtools::check()
+
+## Install the package from local files
+devtools::install()
+
+## Install from Github
+# remotes::install_github("GHACCOUNT/PKGNAME")
+
+
