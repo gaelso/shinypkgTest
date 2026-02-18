@@ -3,9 +3,12 @@
 library(devtools)
 library(usethis)
 library(roxygen2)
+library(here)
 
 ## Create package
-usethis::create_package("shinypkgTest")
+## use "." to add pkg files to an existing project.
+## Requires overriding the .Rproj file
+usethis::create_package(".")
 
 ## Add dependencies, i.e. all the packages that are needed to run the package's functions. Here is a non exhaustive list
 ## + Shiny
@@ -40,9 +43,8 @@ usethis::use_mit_license()
 
 ## Add github actions
 usethis::use_github_action_check_standard()
+#usethis::use_github_action('check_standard')
 
-Updating package content
-These three functions can be run often after building/updating the package’s functions for analytics or the shiny app UI and server.
 
 ## Run often, as soon as you have a new function created or updated
 devtools::load_all()
