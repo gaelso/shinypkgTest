@@ -29,7 +29,7 @@ shiny_run_APPNAME <- function(...) {
 
   ## !!! In a package the translation folder needs to be directed to the package location
   i18n <- shiny.i18n::Translator$new(
-    translation_json_path = system.file("assets/translations.json", package = "PKGNAME")
+    translation_json_path = system.file("assets/translations.json", package = "shinypkgTest")
   )
   i18n$set_translation_language('en')
 
@@ -50,7 +50,7 @@ shiny_run_APPNAME <- function(...) {
     i18n$t("APP TITLE"),
     style = "display:inline;font-color: black !important"
   )
-  app_widow_title <- "APPNAME"
+  app_window_title <- "APPNAME"
 
   ## App colors
   app_primary_color   <- "#4991B0"

@@ -45,7 +45,6 @@ usethis::use_mit_license()
 usethis::use_github_action_check_standard()
 #usethis::use_github_action('check_standard')
 
-
 ## Run often, as soon as you have a new function created or updated
 devtools::load_all()
 
@@ -58,6 +57,7 @@ devtools::document()
 devtools::check()
 
 ## Install the package from local files
+## !!! Required early in the process to find assets
 devtools::install()
 
 ## Install from Github
