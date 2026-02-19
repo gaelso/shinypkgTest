@@ -4,6 +4,11 @@ library(devtools)
 library(usethis)
 library(roxygen2)
 library(here)
+library(tidyverse)
+
+##
+## Initial Setup #######
+##
 
 ## Create package
 ## use "." to add pkg files to an existing project.
@@ -42,8 +47,57 @@ usethis::use_package("units")
 usethis::use_mit_license()
 
 ## Add github actions
-usethis::use_github_action_check_standard()
-#usethis::use_github_action('check_standard')
+# usethis::use_github_action_check_standard()
+usethis::use_github_action("check-standard")
+
+## Add pkgdown for automatic onkline documentation of the package and
+## hosting tutos on GH pages
+usethis::use_pkgdown()
+usethis::use_github_action("pkgdown")
+
+##
+## Add R and inst/assets folders from the template ######
+##
+
+## Copy/paste manually or with this command
+gh_paths <- gh::gh(
+  "/repos/{owner}/{repo}/contents/{path}",
+  owner = "openforis", repo = "shinypkg-template", path = "R"
+  )
+
+if (!"./R" %in% list.dirs("./R")) dir.create("R")
+purrr::walk(seq_along(gh_paths), function(x){
+  download.file(
+    url = gh_paths[[x]]$download_url,
+    destfile = gh_paths[[x]]$path
+    )
+})
+
+gh_paths <- gh::gh(
+  "/repos/{owner}/{repo}/contents/{path}",
+  owner = "openforis", repo = "shinypkg-template", path = "inst/assets"
+  )
+
+if (!"./inst" %in% list.dirs("./inst")) dir.create("inst")
+if (!"./inst/assets" %in% list.dirs("./inst/assets")) dir.create("inst/assets")
+purrr::walk(seq_along(gh_paths), function(x){
+  download.file(
+    url = gh_paths[[x]]$download_url,
+    destfile = gh_paths[[x]]$path
+  )
+})
+
+length(gh_paths)
+names(gh_paths) <- letters[1:length(gh_paths)]
+gh_paths$a$url
+
+gh_paths[[1]]$path
+gh_paths[[1]]$url
+
+
+##
+## Run often ######
+##
 
 ## Run often, as soon as you have a new function created or updated
 devtools::load_all()
@@ -56,9 +110,6 @@ devtools::document()
 ## Useful for debugging
 devtools::check()
 
-## Install the package from local files
-## !!! Required early in the process to find assets
-devtools::install()
 
 ## Install from Github
 # remotes::install_github("GHACCOUNT/PKGNAME")
