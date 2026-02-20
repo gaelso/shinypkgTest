@@ -60,39 +60,40 @@ usethis::use_github_action("pkgdown")
 ##
 
 ## Copy/paste manually or with this command
+dl_dir <- "R"
 gh_paths <- gh::gh(
   "/repos/{owner}/{repo}/contents/{path}",
-  owner = "openforis", repo = "shinypkg-template", path = "R"
+  owner = "openforis", repo = "shinypkg-template", path = dl_dir
   )
 
-if (!"./R" %in% list.dirs("./R")) dir.create("R")
-purrr::walk(seq_along(gh_paths), function(x){
-  download.file(
-    url = gh_paths[[x]]$download_url,
-    destfile = gh_paths[[x]]$path
+if (length(list.files(dl_path)) == 0) {
+  dir.create(dl_dir)
+  purrr::walk(seq_along(gh_paths), function(x){
+    download.file(
+      url = gh_paths[[x]]$download_url,
+      destfile = gh_paths[[x]]$path
     )
-})
+  })
+}
 
+
+dl_dir <- "inst/assets"
 gh_paths <- gh::gh(
   "/repos/{owner}/{repo}/contents/{path}",
-  owner = "openforis", repo = "shinypkg-template", path = "inst/assets"
+  owner = "openforis", repo = "shinypkg-template", path = dl_dir
   )
 
-if (!"./inst" %in% list.dirs("./inst")) dir.create("inst")
-if (!"./inst/assets" %in% list.dirs("./inst/assets")) dir.create("inst/assets")
-purrr::walk(seq_along(gh_paths), function(x){
-  download.file(
-    url = gh_paths[[x]]$download_url,
-    destfile = gh_paths[[x]]$path
-  )
-})
+if (length(list.files(dl_dir)) == 0) {
+  dir.create("inst")
+  dir.create(dl_dir)
+  purrr::walk(seq_along(gh_paths), function(x){
+    download.file(
+      url = gh_paths[[x]]$download_url,
+      destfile = gh_paths[[x]]$path
+    )
+  })
+}
 
-length(gh_paths)
-names(gh_paths) <- letters[1:length(gh_paths)]
-gh_paths$a$url
-
-gh_paths[[1]]$path
-gh_paths[[1]]$url
 
 
 ##
@@ -101,6 +102,7 @@ gh_paths[[1]]$url
 
 ## Run often, as soon as you have a new function created or updated
 devtools::load_all()
+shiny_run_APPNAME()
 
 ## Update function documentation
 devtools::document()
