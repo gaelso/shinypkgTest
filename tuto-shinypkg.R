@@ -94,6 +94,19 @@ if (length(list.files(dl_dir)) == 0) {
   })
 }
 
+##
+## Manually ######
+##
+
+## Manually edit the following files to put the correct package name
+## R/zzz.R -> system.file("assets", package = "PKGNAME")
+## shiny_run_APPNAME.R -> system.file("assets/translations.json", package = "PKGNAME")
+
+## Once system.file updated to point to the correct package, the package needs to
+## be installed to make it's assets available to the app
+## !!! Repeat installation every time a new asset is added.
+# devtools::install()
+
 
 
 ##
@@ -112,6 +125,8 @@ devtools::document()
 ## Useful for debugging
 devtools::check()
 
+## Install the package from local files
+# devtools::install()
 
 ## Install from Github
 # remotes::install_github("GHACCOUNT/PKGNAME")

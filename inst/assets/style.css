@@ -1,4 +1,82 @@
 
+/* Smooth scrolling + hero style + footer */
+
+html, body {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body > .container-fluid {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.bslib-page-navbar > .tab-content {
+  flex: 1 0 auto;
+}
+
+.hero-section {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-title {
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #6c757d;
+}
+
+.hero-image {
+  max-height: 65vh;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 1.5rem;
+}
+
+.feature-card {
+  transition: all 0.2s ease-in-out;
+  border-radius: 1rem;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 1rem 2rem rgba(0,0,0,0.08);
+}
+
+.section-padding {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+.footer {
+  margin-top: auto;
+  /*padding: 1.5rem 0;*/
+    border-top: 1px solid #e9ecef;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+
+
+/* Make buttons smaller */
 .btn-small {
   line-height: 1 !important;
   font-weight: 300 !important;
@@ -42,5 +120,66 @@
 /* Rm container-name to avoid showcase moving to top in value box */
 .bslib-value-box {
   container-name: none !important;
+}
+
+
+/* Hero page custom css */
+html {
+  scroll-behavior: smooth;
+}
+
+.hero-section {
+  min-height: 75vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero-title {
+  font-weight: 700;
+  font-size: 3rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: #6c757d;
+}
+
+.hero-image {
+  max-height: 65vh;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 1.5rem;
+}
+
+.feature-card {
+  transition: all 0.2s ease-in-out;
+  border-radius: 1rem;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 1rem 2rem rgba(0,0,0,0.08);
+}
+
+.section-padding {
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+}
+
+/* Footer */
+.footer {
+  padding: 1.5rem 0;
+  border-top: 1px solid #e9ecef;
+  font-size: 0.9rem;
+  color: #6c757d;
+}
+
+.footer a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
 }
 

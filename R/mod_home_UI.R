@@ -8,10 +8,25 @@ mod_home_UI <- function(id, i18n){
   # invoke later.
   ns <- NS(id)
 
-
   ##
   ## UI Elements ######
   ##
+
+  ## Hook
+  hook_text <- i18n$t("APPNAME does this APPNAME does that")
+
+  hook_img
+
+  footer <- div(
+    class = "container footer text-center",
+    tags$small(
+      "© 2026 MyApp · Developed by ",
+      tags$strong("Your Name"),
+      " · With the support of XYZ Institute"
+    )
+  )
+
+
 
   card1 <- card(
     card_header("Welcome"),
@@ -53,51 +68,86 @@ mod_home_UI <- function(id, i18n){
 
   tagList(
 
-    h2(i18n$t("Welcome to {mocaredd}!")),
-
-    br(), br(),
-
+    # HERO SECTION
     div(
-      "
-      {mocaredd} is a R package and a Shiny application designed to help you with
-      running Monte Carlo Simulations for REDD+ uncertainty analysis.
-      ", style = "font-size: x-large; text-align: center; font-style: italic;font-family: serif;"
-      ),
-    br(), br(),
-    p(
-      "
-      This app is developed in the context of the REDD+ mechanism (Reducing emission from Deforestation
-      and forest Degradation 'plus') and carbon accounting calculations to estimate emission reductions
-      and removal increases of greenhouse gas (GHG) in the forestry sector.
-      "
-      ),
-    # p(
-    #   "
-    #   Emission reductions are estimated by quantifying the amount of greenhouse gas emissions between a
-    #   reference level (i.e baseline) and a monitorig period. These estimates come with a level of uncertainty
-    #   due to the sampling methods and models used to generate the estimations.
-    #   "
-    # ),
-    # p(
-    #   "
-    #   High integrity REDD+ standards, that set rules for the quantification of emissions and removals, and their uncertainties,
-    #   increasingly require the use of Monte Carlo simulations for REDD+ uncertainties. These simulations are often run in spreadsheet
-    #   tools, but the lack of structure and inherent disadvantage of spreadsheets for this task (error prone, difficulty to handle large
-    #   amount of data) is becoming a barrier for the quality, reproducibility and verification of uncertainties based on simulations.
-    #   "
-    # ),
-    # br(),
-    p(
-      "
-      {mocaredd} provides a template for organizing data, and a tool that (1) takes the data, (2) runs Monte Carlo Simulations and (3) produces improved
-      estimates of and confidence intervals around greenhouse gas emissions and emission reductions for REDD+.
-      "
+      class = "container hero-section",
+
+      div(
+        class = "row align-items-center",
+
+        # IMAGE (mobile first)
+        div(
+          class = "col-md-6 order-1 order-md-2 text-center",
+          tags$img(
+            src = "assets/landing-img.jpg",
+            class = "img-fluid hero-image shadow-sm"
+          )
+        ),
+
+        # TEXT
+        div(
+          class = "col-md-6 order-2 order-md-1",
+
+          h1(class = "hero-title", "A Smarter Way to Explore Data"),
+
+          p(
+            class = "hero-subtitle mt-3",
+            "Transform complex data into clear insights with a beautiful, intuitive interface."
+          ),
+
+          br(),
+
+          actionButton(
+            "start",
+            "Get Started",
+            class = "btn btn-primary btn-lg px-4"
+          )
+        )
+      )
     ),
 
-    # layout_columns(
-    #   col_widths = c(4, 4, 4),
-    #   !!!cards
-    # ),
+    # FEATURES SECTION
+    div(
+      class = "container section-padding",
+
+      div(
+        class = "row g-4",
+
+        div(
+          class = "col-md-4",
+          card(
+            class = "feature-card shadow-sm",
+            card_body(
+              h4("Fast & Interactive"),
+              p("Real-time data updates and dynamic visualizations.")
+            )
+          )
+        ),
+
+        div(
+          class = "col-md-4",
+          card(
+            class = "feature-card shadow-sm",
+            card_body(
+              h4("Modern Design"),
+              p("Clean layout optimized for desktop and mobile.")
+            )
+          )
+        ),
+
+        div(
+          class = "col-md-4",
+          card(
+            class = "feature-card shadow-sm",
+            card_body(
+              h4("Powerful Analytics"),
+              p("Built with robust R infrastructure and scalable logic.")
+            )
+          )
+        )
+      )
+    )
+  ),
 
     br(),
 
