@@ -13,9 +13,9 @@ mod_home_UI <- function(id, i18n){
   ##
 
   ## Hook
-  hook_text <- i18n$t("APPNAME does this APPNAME does that")
-
-  hook_img
+  # hook_text <- i18n$t("APPNAME does this APPNAME does that")
+  #
+  # hook_img
 
   footer <- div(
     class = "container footer text-center",
@@ -146,8 +146,7 @@ mod_home_UI <- function(id, i18n){
           )
         )
       )
-    )
-  ),
+    ),
 
     br(),
 
