@@ -34,7 +34,7 @@ shiny_run_APPNAME <- function(...) {
   i18n$set_translation_language('en')
 
   ## + Javascript ===============================
-  ## Script moved to files in inst/assets and called in
+  ## Script moved to files in inst/assets and called in the header
 
 
   ## + UI Elements =============================================================
@@ -75,15 +75,24 @@ shiny_run_APPNAME <- function(...) {
   language_selector <- shinyWidgets::pickerInput(
     inputId = "language",
     label = NULL,
-    choices = c("en"),
-    choicesOpt =  list(content = c('<i class="fi fi-gb"></i> EN')),
-    # choices = c("en", "fr", "sp"),
-    # choicesOpt =  list(content = c('<i class="fi fi-gb"></i> EN', '<i class="fi fi-fr"></i> FR', '<i class="fi fi-es"></i> ES')),
+    #choices = c("en"),
+    #choicesOpt =  list(content = c('<i class="fi fi-gb"></i> EN')),
+    choices = c("en", "fr", "sp"),
+    choicesOpt =  list(content = c('<i class="fi fi-gb"></i> EN', '<i class="fi fi-fr"></i> FR', '<i class="fi fi-es"></i> ES')),
     selected = "en",
     width = "auto",
     option = shinyWidgets::pickerOptions(style = "z-index:10000;")
   )
 
+  ## Footer div
+  app_footer <- div(
+    class = "container footer text-center",
+    tags$small(
+      "© 2026 MyApp · Developed by ",
+      tags$strong("Your Name"),
+      " · With the support of XYZ Institute"
+    )
+  )
 
 
   ##
@@ -124,9 +133,14 @@ shiny_run_APPNAME <- function(...) {
       title = app_title,
       window_title = app_window_title,
       theme = app_theme,
-      navbar_options = navbar_options(bg = "#f8f9fa"),
+      navbar_options = navbar_options(
+        bg = "#f8f9fa",
+        position = "fixed-top",
+        expand = "md"
+        ),
       fillable = FALSE, ## Not needed for now, make a tab fill the whole browser, cool for leaflets
       # inverse = FALSE, ## Not working well with yeti, overridden in assets/styles.css
+      footer = app_footer,
 
       ## Panels ------
       nav_spacer(), ## align menu to the right
@@ -154,9 +168,9 @@ shiny_run_APPNAME <- function(...) {
 
       nav_item(language_selector)
 
-    ) |> ## End page_navbar
+    ) #|> ## End page_navbar
       ## Make navbar larger before switch to menu button
-      shiny::tagAppendAttributes(.cssSelector = "nav", class = "navbar-expand-md")
+      #shiny::tagAppendAttributes(.cssSelector = "nav", class = "navbar-expand-md")
 
   ) ## End tagList
 
