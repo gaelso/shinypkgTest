@@ -88,9 +88,9 @@ shiny_run_APPNAME <- function(...) {
   app_footer <- div(
     class = "container footer text-center",
     tags$small(
-      "© 2026 MyApp · Developed by ",
+      "(c) 2026 MyApp - Developed by ",
       tags$strong("Your Name"),
-      " · With the support of XYZ Institute"
+      " - With the support of XYZ Institute"
     )
   )
 

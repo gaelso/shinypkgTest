@@ -26,11 +26,11 @@ mod_tool_UI <- function(id, i18n){
         "Fusce vitae ante non turpis rutrum varius. Curabitur pulvinar lacinia velit,
         ut pellentesque lectus facilisis vitae."
       ),
-      selectInput(ns("species"), "Species", levels(iris$Species), multiple = TRUE),
+      selectInput(ns("species"), "Species", levels(datasets::iris$Species), multiple = TRUE),
       sliderInput(
         ns("petal_length"), "Petal Length",
-        min = min(iris$Petal.Length), max = max(iris$Petal.Length),
-        value = c(min(iris$Petal.Length), max(iris$Petal.Length))
+        min = min(datasets::iris$Petal.Length), max = max(datasets::iris$Petal.Length),
+        value = c(min(datasets::iris$Petal.Length), max(datasets::iris$Petal.Length))
       )
     )
   )
@@ -158,7 +158,7 @@ mod_tool_UI <- function(id, i18n){
         ## Cards
         div(
           id = ns("card_section"),
-          layout_columns(card1, card2),
+          layout_column_wrap(card1, card2, width = "300px"),
           card3
         )
       ),

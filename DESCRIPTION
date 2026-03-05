@@ -11,21 +11,15 @@ RoxygenNote: 7.3.2
 Imports: 
     bsicons,
     bslib,
+    crosstalk,
+    d3scatter (>= 0.1.0),
+    datasets,
     dplyr,
-    forcats,
-    ggplot2,
-    magrittr,
-    purrr,
-    readr,
+    htmltools,
     rlang,
-    sf,
     shiny,
     shiny.i18n,
-    shinyFiles,
     shinyjs,
-    shinyWidgets,
-    stringr,
-    terra,
-    tibble,
-    tidyselect,
-    units
+    shinyWidgets
+Remotes: 
+    jcheng5/d3scatter

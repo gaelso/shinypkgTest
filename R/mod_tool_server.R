@@ -11,13 +11,13 @@ mod_tool_server <- function(id, rv) {
 
     ## Sidebar part 1 ######
     observe({
-      rv$rv1$user_iris <- iris |>
-        filter(is.null(input$species) | Species %in% input$species) |>
-        filter(
-          Petal.Length >= min(input$petal_length),
-          Petal.Length<= max(input$petal_length)
+      rv$rv1$user_iris <- datasets::iris |> # data("iris", envir = environment())
+        dplyr::filter(is.null(input$species) | .data$Species %in% input$species) |>
+        dplyr::filter(
+          .data$Petal.Length >= min(input$petal_length),
+          .data$Petal.Length<= max(input$petal_length)
         )
-      rv$rv1$shared_iris <- SharedData$new(rv$rv1$user_iris)
+      rv$rv1$shared_iris <- crosstalk::SharedData$new(rv$rv1$user_iris)
     })
 
     ## Sidebar part 2 ######
@@ -32,11 +32,11 @@ mod_tool_server <- function(id, rv) {
     ## Virtual boxes ======
 
     output$vb_seplen_mean <- renderUI({
-      round(mean(rv$rv1$user_iris$Sepal.Length), 1)
+      fct_mean(.df = rv$rv1$user_iris, .colnum = .data$Sepal.Length, .rounding = 1)
     })
 
     output$vb_sepwid_mean <- renderUI({
-      round(mean(rv$rv1$user_iris$Sepal.Width), 1)
+      fct_mean(.df = rv$rv1$user_iris, .colnum = .data$Sepal.Width, .rounding = 1)
     })
 
     output$vb_nb_species <- renderUI({
@@ -44,18 +44,18 @@ mod_tool_server <- function(id, rv) {
     })
 
     ## Panel cards ======
-    output$scatter1 <- renderD3scatter({
-      d3scatter(rv$rv1$shared_iris, ~Petal.Length, ~Petal.Width, ~Species, width = "100%")
+    output$scatter1 <- d3scatter::renderD3scatter({
+      d3scatter::d3scatter(rv$rv1$shared_iris, ~Petal.Length, ~Petal.Width, ~Species, width = "100%")
     })
 
-    output$scatter2 <- renderD3scatter({
-      d3scatter(rv$rv1$shared_iris, ~Sepal.Length, ~Sepal.Width, ~Species, width = "100%")
+    output$scatter2 <- d3scatter::renderD3scatter({
+      d3scatter::d3scatter(rv$rv1$shared_iris, ~Sepal.Length, ~Sepal.Width, ~Species, width = "100%")
     })
 
     output$summary <- renderPrint({
-      df <- rv$rv1$shared_iris$data(withSelection = TRUE) %>%
-        filter(selected_ | is.na(selected_)) %>%
-        mutate(selected_ = NULL)
+      df <- rv$rv1$shared_iris$data(withSelection = TRUE) |>
+        dplyr::filter(.data$selected_ | is.na(.data$selected_)) |>
+        dplyr::mutate(selected_ = NULL)
 
       cat(nrow(df), "observation(s) selected\n\n")
       summary(df)
