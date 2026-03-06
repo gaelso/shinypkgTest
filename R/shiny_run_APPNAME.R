@@ -39,17 +39,25 @@ shiny_run_APPNAME <- function(...) {
 
   ## + UI Elements =============================================================
 
-  ## App title with logo
-  app_title <- div(
-    tags$a(
-      href = "./", ## Send back to home page
-      alt = "APPNAME",
-      tags$img(src="assets/logo.png", height = '60px'),
-      .noWS = "before-end"
-    ),
-    i18n$t("APP TITLE"),
-    style = "display:inline;font-color: black !important"
-  )
+  ## App title with logo (as function because i18n$t() needs to be inside page_navbar())
+  app_title <- function(
+    .title = "My Analytical Dashboard",
+    .alt = "APPNAME",
+    .logo = "assets/logo.png",
+    .logo_height = '40px' ## CANNOT EXCEED 40px to avoid resizing issues (minor)
+    ) {
+    div(
+      tags$a(
+        href = "./", ## Send back to home page
+        alt = .alt,
+        tags$img(src = .logo, height = .logo_height),
+        .noWS = "before-end"
+      ),
+      i18n$t(.title),
+      style = "display:inline;font-color: black !important"
+    )
+  }
+
   app_window_title <- "APPNAME"
 
   ## App colors
@@ -72,16 +80,18 @@ shiny_run_APPNAME <- function(...) {
   )
 
   ## Dropdown list for language selection
-  language_selector <- shinyWidgets::pickerInput(
-    inputId = "language",
-    label = NULL,
-    #choices = c("en"),
-    #choicesOpt =  list(content = c('<i class="fi fi-gb"></i> EN')),
-    choices = c("en", "fr", "sp"),
-    choicesOpt =  list(content = c('<i class="fi fi-gb"></i> EN', '<i class="fi fi-fr"></i> FR', '<i class="fi fi-es"></i> ES')),
-    selected = "en",
-    width = "auto",
-    option = shinyWidgets::pickerOptions(style = "z-index:10000;")
+  language_selector <- div(
+    style = "margin-top: 4px;",
+    shinyWidgets::pickerInput(
+      inputId = "language",
+      label = NULL,
+      #choices = c("en"),
+      #choicesOpt =  list(content = c('<i class="fi fi-gb"></i> EN')),
+      choices = c("en", "fr", "sp"),
+      choicesOpt =  list(content = c('<i class="fi fi-gb"></i> EN', '<i class="fi fi-fr"></i> FR', '<i class="fi fi-es"></i> ES')),
+      selected = "en",
+      width = "auto"
+    )
   )
 
   ## Footer div
@@ -130,13 +140,13 @@ shiny_run_APPNAME <- function(...) {
 
       ## Navbar setup ------
       id = "navbar",
-      title = app_title,
+      title = app_title(),
       window_title = app_window_title,
       theme = app_theme,
       navbar_options = navbar_options(
         bg = "#f8f9fa",
         position = "fixed-top",
-        expand = "md"
+        class = "navbar-expand-sm"
         ),
       fillable = FALSE, ## Not needed for now, make a tab fill the whole browser, cool for leaflets
       # inverse = FALSE, ## Not working well with yeti, overridden in assets/styles.css

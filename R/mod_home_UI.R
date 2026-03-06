@@ -24,16 +24,16 @@ mod_home_UI <- function(id, i18n){
 
   hero_txt <- div(
     class = "col-md-6 order-2 order-md-1",
-    h1(class = "hero-title", "A Smarter Way to Explore Data"),
+    h1(class = "hero-title", i18n$t("A Smarter Way to Explore Data")),
     p(
       class = "hero-subtitle mt-3",
-      "Transform complex data into clear insights with a beautiful, intuitive interface."
+      i18n$t("Transform complex data into clear insights with a beautiful, intuitive interface.")
     ),
     br(),
     ## ACTION BUTTON
     actionButton(
       inputId = ns("to_tool"),
-      label = "Get Started",
+      label = i18n$t("Get Started"),
       class = "btn btn-primary btn-lg px-4"
     )
   )

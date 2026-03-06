@@ -1,12 +1,24 @@
+/* Fix last menu item dropping on resizing with navbar-expand-sm */
+.navbar-nav {
+  flex-wrap: nowrap;  /* prevent wrapping */
+}
+.navbar {
+  /*overflow-x: auto;     /* optional: allow scrolling if too wide */
+  white-space: nowrap;  /* prevent text wrapping inside items */
+}
+
+/* Fix the bootstrap-select dropdown specifically */
+.bootstrap-select .dropdown-menu {
+  z-index: 10000 !important;
+}
 
 /* Smooth scrolling + hero style + footer */
-
 html, body {
   height: 100%;
 }
 
 body {
-  padding-top: 40px;
+  padding-top: 70px;
 }
 
 html {
@@ -125,4 +137,3 @@ body > .container-fluid {
 .bslib-value-box {
   container-name: none !important;
 }
-
